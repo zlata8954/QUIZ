@@ -1,8 +1,10 @@
 'use strict';
 
-const main = document.querySelector('.main')
+const main = document.querySelector('.main');
 
-const selection = document.querySelector('.selection')
+const selection = document.querySelector('.selection');
+
+const title = document.querySelector('.main__title');
 
 const getData = () => {
     const dataBase = [
@@ -18,52 +20,52 @@ const getData = () => {
             {
                 type: 'checkbox',
                 question: 'Вопрос',
-                answer: ['правильный1', 'правильный2', 'неправильный', 'неправильный'],
+                answers: ['правильный1', 'правильный2', 'неправильный', 'неправильный'],
                 correct: 2,
             },
             {
                 type: 'radio',
                 question: 'Вопрос',
-                answer: ['правильный1', 'неправильный', 'неправильный', 'неправильный'],
+                answers: ['правильный1', 'неправильный', 'неправильный', 'неправильный'],
             },
             {
                 type: 'checkbox',
                 question: 'Вопрос',
-                answer: ['правильный1', 'правильный2', 'неправильный', 'неправильный'],
+                answers: ['правильный1', 'правильный2', 'неправильный', 'неправильный'],
                 correct: 2,
             },
             {
                 type: 'radio',
                 question: 'Вопрос',
-                answer: ['правильный1', 'неправильный', 'неправильный', 'неправильный'],
+                answers: ['правильный1', 'неправильный', 'неправильный', 'неправильный'],
             },
             {
                 type: 'checkbox',
                 question: 'Вопрос',
-                answer: ['правильный1', 'правильный2', 'неправильный', 'неправильный'],
+                answers: ['правильный1', 'правильный2', 'неправильный', 'неправильный'],
                 correct: 2,
             },
             {
                 type: 'radio',
                 question: 'Вопрос',
-                answer: ['правильный1', 'неправильный', 'неправильный', 'неправильный'],
+                answers: ['правильный1', 'неправильный', 'неправильный', 'неправильный'],
             },
             {
                 type: 'checkbox',
                 question: 'Вопрос',
-                answer: ['правильный1', 'неправильный', 'неправильный', 'неправильный'],
+                answers: ['правильный1', 'неправильный', 'неправильный', 'неправильный'],
                 correct: 1,
             },
             {
                 type: 'checkbox',
                 question: 'Вопрос',
-                answer: ['правильный1', 'правильный2', 'правильный3', 'неправильный'],
+                answers: ['правильный1', 'правильный2', 'правильный3', 'неправильный'],
                 correct: 3,
             },
             {
                 type: 'checkbox',
                 question: 'Вопрос',
-                answer: ['правильный1', 'правильный2', 'неправильный', 'неправильный'],
+                answers: ['правильный1', 'правильный2', 'неправильный', 'неправильный'],
                 correct: 2,
             }
         ]
@@ -80,45 +82,45 @@ const getData = () => {
             {
                 type: 'radio',
                 question: 'Вопрос',
-                answer: ['правильный1', 'неправильный', 'неправильный', 'неправильный'],
+                answers: ['правильный1', 'неправильный', 'неправильный', 'неправильный'],
             },
             {
                 type: 'radio',
                 question: 'Вопрос',
-                answer: ['правильный1', 'неправильный', 'неправильный', 'неправильный'],
+                answers: ['правильный1', 'неправильный', 'неправильный', 'неправильный'],
             },
             {
                 type: 'checkbox',
                 question: 'Вопрос',
-                answer: ['правильный1', 'правильный2', 'неправильный', 'неправильный'],
+                answers: ['правильный1', 'правильный2', 'неправильный', 'неправильный'],
                 correct: 2,
             },
             {
                 type: 'radio',
                 question: 'Вопрос',
-                answer: ['правильный1', 'неправильный', 'неправильный', 'неправильный'],
+                answers: ['правильный1', 'неправильный', 'неправильный', 'неправильный'],
             },
             {
                 type: 'radio',
                 question: 'Вопрос',
-                answer: ['правильный1', 'неправильный', 'неправильный', 'неправильный'],
+                answers: ['правильный1', 'неправильный', 'неправильный', 'неправильный'],
             },
             {
                 type: 'checkbox',
                 question: 'Вопрос',
-                answer: ['правильный1', 'неправильный', 'неправильный', 'неправильный'],
+                answers: ['правильный1', 'неправильный', 'неправильный', 'неправильный'],
                 correct: 1,
             },
             {
                 type: 'checkbox',
                 question: 'Вопрос',
-                answer: ['правильный1', 'правильный2', 'правильный3', 'неправильный'],
+                answers: ['правильный1', 'правильный2', 'правильный3', 'неправильный'],
                 correct: 3,
             },
             {
                 type: 'checkbox',
                 question: 'Вопрос',
-                answer: ['правильный1', 'правильный2', 'неправильный', 'неправильный'],
+                answers: ['правильный1', 'правильный2', 'неправильный', 'неправильный'],
                 correct: 2,
             }
         ]
@@ -131,13 +133,13 @@ const hideElem = elem => {
 let opacity = getComputedStyle(elem).getPropertyValue('opacity');
 
 const animation = () => {
-   opacity -= 0.001;
-   elem.style.opacity = opacity;
-   if (opacity > 0) {
-       requestAnimationFrame(animation);
-   } else {
-       elem.style.display = 'none';
-   }
+opacity -= 0.5;
+elem.style.opacity = opacity;
+if (opacity > 0) {
+requestAnimationFrame(animation);
+} else {
+elem.style.display = 'none';
+}
 };
 
 requestAnimationFrame(animation);
@@ -169,15 +171,93 @@ buttons.push(button);
 return buttons;
     };
 
+const createAnswer = data => {
+    const type = data.type;
+
+    return data.answers.map(item =>{
+        const label = document.createElement('label');
+        label.className = 'answer';
+    const input = document.createElement('input');
+    input.type = type;
+    input.name = 'answer';
+    input.className = `answer__${type}`;
+
+    const text = document.createTextNode(item);
+
+    label.append(input, text);
+
+    return label;
+
+    });
+}
+
     const renderQuiz = quiz => {
+        hideElem(title);
 hideElem(selection);
+
+const questionBox = document.createElement('div');
+questionBox.className = 'main__box main__box-question';
+
+main.append(questionBox);
+
+let questionCount = 0;
+
+const showQuestion = () => {
+    const data = quiz.list[questionCount];
+    questionCount += 1;
+
+    questionBox.textContent = '';
+
+    const form = document.createElement('form');
+    form.className = 'main__form-question';
+    form.dataset.count = `${questionCount}/${quiz.list.length}`;
+
+    const fieldset = document.createElement('fieldset');
+
+    const legend = document.createElement('legend');
+
+    legend.className = 'main__subtitle';
+
+    legend.textContent = data.question;
+
+    const answers = createAnswer(data);
+
+    const button = document.createElement('button');
+
+    button.className = 'main__btn question__next';
+    button.type = 'submit';
+    button.textContent = 'Подтвердить';
+
+    fieldset.append(legend, ...answers);
+
+    form.append(fieldset, button);
+
+    questionBox.append(form);
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        let ok = false;
+        const answer = [...form.answer].map((input) => {
+            if (input.checked) ok = true;
+            input.checked ? input.value : false;
+        });
+        if (ok) {
+            console.log(answer);
+        }
+        else {
+            console.error('Не выбран ни один ответ!');
+        }
+        
+    })
+};
+
+showQuestion();
     };
 
     const addClick = (buttons, data) => {
 buttons.forEach(btn => {
 btn.addEventListener('click', () => {
-    data.find(item => item.id === btn.dataset.id);
-    renderQuiz(quiz);
+    renderQuiz(data.find(item => item.id === btn.dataset.id));
 });
 })
 };
